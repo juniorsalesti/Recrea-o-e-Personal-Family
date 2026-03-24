@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Family | Recreação e Excelência</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#08656A',
+                        card: '#064d51',
+                        accent: '#ffffff', // White for details
+                    },
+                    fontFamily: {
+                        display: ['Playfair Display', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <style>
+        body {
+            background-color: #08656A;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        .glass {
+            background: rgba(8, 101, 106, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .text-gradient {
+            background: linear-gradient(to right, #ffffff, #000000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .bento-item {
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: rgba(6, 77, 81, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .bento-item:hover {
+            transform: scale(1.02);
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .marquee-content {
+            display: flex;
+            animation: marquee 30s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .cta-pulse {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4); }
+            70% { box-shadow: 0 0 0 20px rgba(255, 255, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+        }
+
+        /* Premium Button Effect */
+        .btn-premium {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .btn-premium::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                120deg,
+                transparent,
+                rgba(255, 255, 255, 0.3),
+                transparent
+            );
+            transition: all 0.6s;
+        }
+        .btn-premium:hover::before {
+            left: 100%;
+        }
+        .btn-premium:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .btn-premium:active {
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+<body class="font-sans">
+
+    <!-- HEADER -->
+    <header class="fixed top-0 left-0 w-full z-50 glass py-4 px-6 md:px-12 flex justify-between items-center">
+        <div class="flex items-center">
+            <img src="https://i.ibb.co/ycttXwfg/Sem-nome-90-x-60-px-2.png" alt="Personal Family Logo" class="h-14 md:h-20 w-auto" referrerpolicy="no-referrer">
+        </div>
+        <nav class="hidden md:flex space-x-8 text-sm font-medium uppercase tracking-widest opacity-80">
+            <a href="#home" class="hover:text-white transition-colors">Início</a>
+            <a href="#servicos" class="hover:text-white transition-colors">Serviços</a>
+            <a href="#diferenciais" class="hover:text-white transition-colors">Diferenciais</a>
+            <a href="#sobre" class="hover:text-white transition-colors">Sobre</a>
+        </nav>
+        <a href="https://wa.me/5500000000000" target="_blank" class="btn-premium bg-white text-black px-6 py-2.5 rounded-full text-sm font-bold hover:bg-gray-100 transition-all">
+            CONTATO
+        </a>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
+        <!-- Background Image with Gradient Overlay -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1472162072942-cd5147eb3902?q=80&w=2069&auto=format&fit=crop" 
+                 alt="Crianças brincando" 
+                 class="w-full h-full object-cover opacity-30 scale-110 hero-img"
+                 referrerpolicy="no-referrer">
+            <div class="absolute inset-0 bg-gradient-to-b from-dark via-transparent to-dark"></div>
+        </div>
+
+        <div class="relative z-10 text-center px-6 max-w-5xl">
+            <h1 class="hero-title text-5xl md:text-8xl font-display font-bold leading-none tracking-tighter mb-6">
+                Onde a <span class="italic text-white">Diversão</span> <br> Encontra a Excelência.
+            </h1>
+            <p class="hero-subtitle text-lg md:text-xl text-gray-100 max-w-2xl mx-auto mb-10 font-light leading-relaxed">
+                Recreação e Personal Kids de alto padrão para condomínios e eventos. Transformamos o tempo livre em desenvolvimento e memórias inesquecíveis.
+            </p>
+            <div class="hero-cta">
+                <a href="#servicos" class="btn-premium cta-pulse inline-block bg-white text-black px-10 py-4 rounded-full text-lg font-bold tracking-tight transition-transform">
+                    Conheça Nossos Serviços
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- AUTHORITY MARQUEE -->
+    <section class="py-8 border-y border-white/10 bg-card overflow-hidden">
+        <div class="marquee-content whitespace-nowrap flex items-center space-x-12 md:space-x-24">
+            <span class="text-base md:text-xl font-display italic opacity-30 uppercase tracking-widest">COLÔNIA DE FÉRIAS</span>
+            <span class="text-base md:text-xl font-display italic opacity-30 uppercase tracking-widest">AULAS COLETIVAS</span>
+            <span class="text-base md:text-xl font-display italic opacity-30 uppercase tracking-widest">PERSONAL KIDS</span>
+            <span class="text-base md:text-xl font-display italic opacity-30 uppercase tracking-widest">RECREAÇÃO PREMIUM</span>
+            <span class="text-base md:text-xl font-display italic opacity-30 uppercase tracking-widest">CONDOMÍNIOS DE LUXO</span>
+            <!-- Repeat for seamless loop -->
+            <span class="text-base md:text-xl font-display italic opacity-30 uppercase tracking-widest">COLÔNIA DE FÉRIAS</span>
+            <span class="text-base md:text-xl font-display italic opacity-30 uppercase tracking-widest">AULAS COLETIVAS</span>
+            <span class="text-base md:text-xl font-display italic opacity-30 uppercase tracking-widest">PERSONAL KIDS</span>
+            <span class="text-base md:text-xl font-display italic opacity-30 uppercase tracking-widest">RECREAÇÃO PREMIUM</span>
+            <span class="text-base md:text-xl font-display italic opacity-30 uppercase tracking-widest">CONDOMÍNIOS DE LUXO</span>
+        </div>
+    </section>
+
+    <!-- BENTO GRID DIFERENCIAIS -->
+    <section id="diferenciais" class="py-16 px-6 md:px-12 max-w-7xl mx-auto">
+        <div class="mb-12 reveal">
+            <h2 class="text-sm font-bold text-white tracking-[0.3em] uppercase mb-3 opacity-70">Por que nos escolher</h2>
+            <h3 class="text-4xl md:text-5xl font-display font-bold leading-tight">Diferenciais que elevam <br> o padrão da recreação.</h3>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Large Item -->
+            <div class="md:col-span-2 glass p-8 rounded-3xl flex flex-col justify-between h-[400px] bento-item reveal">
+                <div>
+                    <div class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    </div>
+                    <h4 class="text-2xl font-bold mb-4">Segurança e Profissionalismo</h4>
+                    <p class="text-gray-200 max-w-md">Nossa equipe é liderada por especialistas, garantindo um ambiente seguro e educativo para todas as idades.</p>
+                </div>
+            </div>
+
+            <!-- Small Item -->
+            <div class="glass p-8 rounded-3xl bento-item reveal">
+                <div class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center mb-6">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </div>
+                <h4 class="text-xl font-bold mb-4">Energia e Engajamento</h4>
+                <p class="text-gray-200">Atividades dinâmicas que mantêm as crianças ativas e motivadas do início ao fim.</p>
+            </div>
+
+            <!-- Small Item -->
+            <div class="glass p-8 rounded-3xl bento-item reveal">
+                <div class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center mb-6">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                </div>
+                <h4 class="text-xl font-bold mb-4">Foco em Condomínios</h4>
+                <p class="text-gray-200">Especialistas em aulas coletivas e recreação dentro da infraestrutura do seu prédio.</p>
+            </div>
+
+            <!-- Medium Item -->
+            <div class="md:col-span-2 glass p-8 rounded-3xl flex items-center space-x-8 bento-item reveal">
+                <div class="hidden md:block w-1/3 h-full rounded-2xl overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=400&h=300&fit=crop" class="w-full h-full object-cover" referrerpolicy="no-referrer">
+                </div>
+                <div class="md:w-2/3">
+                    <h4 class="text-2xl font-bold mb-4">Colônia de Férias</h4>
+                    <p class="text-gray-200">Planejamento pedagógico completo para períodos de férias, unindo esporte, arte e lazer.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVIÇOS / SOBRE -->
+    <section id="servicos" class="py-16 bg-card">
+        <div class="px-6 md:px-12 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div class="reveal">
+                <h2 class="text-sm font-bold text-white tracking-[0.3em] uppercase mb-3 opacity-70">Nossos Serviços</h2>
+                <h3 class="text-4xl md:text-5xl font-display font-bold leading-tight mb-6">Personal Kids e Recreação de Elite.</h3>
+                <div class="space-y-5">
+                    <div class="flex items-start space-x-4">
+                        <div class="text-white font-display text-2xl">01.</div>
+                        <div>
+                            <h4 class="text-xl font-bold mb-2">Personal Kids</h4>
+                            <p class="text-gray-300">Treinamento físico lúdico e personalizado para crianças, focado em coordenação e saúde.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <div class="text-white font-display text-2xl">02.</div>
+                        <div>
+                            <h4 class="text-xl font-bold mb-2">Aulas Coletivas</h4>
+                            <p class="text-gray-300">Futebol, natação e esportes variados em condomínios, promovendo a socialização.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <div class="text-white font-display text-2xl">03.</div>
+                        <div>
+                            <h4 class="text-xl font-bold mb-2">Eventos Corporativos</h4>
+                            <p class="text-gray-300">Soluções de recreação para empresas que valorizam o bem-estar das famílias.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="relative reveal">
+                <div class="rounded-3xl overflow-hidden aspect-[4/5]">
+                    <img src="https://i.ibb.co/F1LLSfq/imagem-2026-03-24-205121578.png" alt="Esportes" class="w-full h-full object-cover" referrerpolicy="no-referrer">
+                </div>
+                <div class="absolute -bottom-10 -left-10 glass p-8 rounded-2xl hidden md:block">
+                    <div class="text-4xl font-display font-bold text-white"><span id="experience-counter">0</span>+ Anos</div>
+                    <div class="text-sm uppercase tracking-widest opacity-60">De Experiência</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="py-16 px-6 md:px-12 max-w-7xl mx-auto">
+        <div class="text-center mb-12 reveal">
+            <h2 class="text-sm font-bold text-white tracking-[0.3em] uppercase mb-3 opacity-70">Depoimentos</h2>
+            <h3 class="text-4xl md:text-5xl font-display font-bold">O que dizem as famílias</h3>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="glass p-8 rounded-3xl reveal">
+                <div class="flex text-white mb-4">
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                </div>
+                <p class="text-gray-100 italic mb-6">"A melhor decisão para o nosso condomínio. Os recreadores são extremamente atenciosos e as crianças amam as aulas."</p>
+                <div class="flex items-center space-x-4">
+                    <div class="w-10 h-10 rounded-full bg-white/10"></div>
+                    <div>
+                        <div class="font-bold">Mariana Silva</div>
+                        <div class="text-xs opacity-50">Mãe do Pedro e da Alice</div>
+                    </div>
+                </div>
+            </div>
+            <!-- More testimonials -->
+            <div class="glass p-8 rounded-3xl reveal">
+                <div class="flex text-white mb-4">
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                </div>
+                <p class="text-gray-100 italic mb-6">"O trabalho de Personal Kids mudou a disposição do meu filho. Ele está muito mais ativo e coordenado."</p>
+                <div class="flex items-center space-x-4">
+                    <div class="w-10 h-10 rounded-full bg-white/10"></div>
+                    <div>
+                        <div class="font-bold">Ricardo Oliveira</div>
+                        <div class="text-xs opacity-50">Pai do Lucas</div>
+                    </div>
+                </div>
+            </div>
+            <div class="glass p-8 rounded-3xl reveal">
+                <div class="flex text-white mb-4">
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                </div>
+                <p class="text-gray-100 italic mb-6">"Profissionais de altíssimo nível. A colônia de férias foi um sucesso absoluto no nosso condomínio."</p>
+                <div class="flex items-center space-x-4">
+                    <div class="w-10 h-10 rounded-full bg-white/10"></div>
+                    <div>
+                        <div class="font-bold">Síndico Residencial Alpha</div>
+                        <div class="text-xs opacity-50">Gestão Predial</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA SECTION -->
+    <section class="relative py-24 px-6 md:px-12 overflow-hidden">
+        <!-- Background Accent Glow -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-white/5 rounded-full blur-[120px] pointer-events-none"></div>
+        
+        <div class="max-w-5xl mx-auto relative z-10">
+            <div class="glass p-12 md:p-20 rounded-[40px] text-center reveal border-white/10">
+                <h2 class="text-4xl md:text-7xl font-display font-bold leading-tight mb-8 tracking-tighter">
+                    Leve a <span class="italic text-white underline underline-offset-8 decoration-1">Excelência</span> <br> para o seu Condomínio.
+                </h2>
+                <p class="text-xl md:text-2xl text-gray-300 mb-12 max-w-2xl mx-auto font-light leading-relaxed">
+                    Transforme o lazer em uma experiência de alto padrão. Nossa equipe está pronta para criar momentos inesquecíveis e seguros para sua família.
+                </p>
+                <div class="flex flex-col md:flex-row items-center justify-center gap-8">
+                    <a href="https://wa.me/5500000000000" target="_blank" class="btn-premium w-full md:w-auto bg-white text-black px-12 py-6 rounded-full text-xl font-bold tracking-tight shadow-2xl flex items-center justify-center gap-3 group">
+                        <span>Falar com Especialista</span>
+                        <svg class="w-6 h-6 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </a>
+                    <div class="flex flex-col items-center md:items-start">
+                        <span class="text-sm uppercase tracking-[0.2em] font-bold opacity-40">Atendimento Imediato</span>
+                        <span class="text-xs opacity-30">Via WhatsApp Business</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-12 border-t border-white/10 bg-dark">
+        <div class="px-6 md:px-12 max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-6 md:mb-0">
+                <img src="https://i.ibb.co/ycttXwfg/Sem-nome-90-x-60-px-2.png" alt="Personal Family Logo" class="h-14 w-auto" referrerpolicy="no-referrer">
+            </div>
+            <div class="flex space-x-6 text-xs uppercase tracking-widest opacity-50 mb-6 md:mb-0">
+                <a href="#" class="hover:text-white">Instagram</a>
+                <a href="#" class="hover:text-white">WhatsApp</a>
+                <a href="#" class="hover:text-white">E-mail</a>
+            </div>
+            <div class="text-[10px] uppercase tracking-widest opacity-30">
+                &copy; 2026 Recreação e Personal Family. Todos os direitos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <!-- WHATSAPP FLOATING BUTTON -->
+    <a href="https://wa.me/5500000000000" target="_blank" class="fixed bottom-8 right-8 z-[100] bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform flex items-center justify-center group">
+        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        <span class="absolute right-full mr-4 bg-white text-black px-3 py-1 rounded-lg text-xs font-bold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-lg">
+            Fale Conosco
+        </span>
+    </a>
+
+    <!-- GSAP ANIMATIONS -->
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero Entrance
+        window.addEventListener('load', () => {
+            const tl = gsap.timeline();
+            tl.from('.hero-img', { scale: 1.3, duration: 2, ease: 'power2.out' })
+              .from('.hero-title', { y: 100, opacity: 0, duration: 1, ease: 'power3.out' }, '-=1.5')
+              .from('.hero-subtitle', { y: 50, opacity: 0, duration: 1, ease: 'power3.out' }, '-=0.8')
+              .from('.hero-cta', { y: 30, opacity: 0, duration: 1, ease: 'power3.out' }, '-=0.6')
+              .from('header', { y: -100, opacity: 0, duration: 1 }, '-=1');
+        });
+
+        // Scroll Reveal
+        const reveals = document.querySelectorAll('.reveal');
+        reveals.forEach((el) => {
+            gsap.from(el, {
+                scrollTrigger: {
+                    trigger: el,
+                    start: 'top 85%',
+                    toggleActions: 'play none none none'
+                },
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                ease: 'power2.out'
+            });
+        });
+
+        // Experience Counter Animation
+        const counterEl = document.getElementById('experience-counter');
+        if (counterEl) {
+            gsap.to(counterEl, {
+                innerText: 10,
+                duration: 2,
+                snap: { innerText: 1 },
+                scrollTrigger: {
+                    trigger: counterEl,
+                    start: 'top 90%',
+                    toggleActions: 'play none none none'
+                }
+            });
+        }
+
+        // Bento Hover Effect (handled by CSS, but could add GSAP for more complex)
+    </script>
+</body>
+</html>
+
